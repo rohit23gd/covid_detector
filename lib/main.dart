@@ -2,11 +2,8 @@
 
 import 'dart:io';
 import 'dart:ui';
-
 import 'package:ai_covid_detector/Result.dart';
-import 'package:ai_covid_detector/save.dart';
 import 'package:flutter/material.dart';
-import 'package:image/image.dart' as img;
 import 'package:tflite/tflite.dart';
 import 'package:image_picker/image_picker.dart';
 import 'Result.dart';
@@ -19,7 +16,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -45,7 +41,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   var _outputs;
   var _image;
-  late img.Image img3;
   var path_img;
   var color_green;
   var upload_text = "Choose Image";
@@ -62,8 +57,8 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  Color gradientStart = Color(0xFFEC33DE); //Color.deepPurple[700];
-  Color gradientEnd = Color(0xFF490B45); //Color.purple[500];
+  Color gradientStart = Color(0xFFEC33DE);
+  Color gradientEnd = Color(0xFF490B45);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -173,11 +168,6 @@ class _MyHomePageState extends State<MyHomePage> {
     final ImagePicker _picker = ImagePicker();
     var image = await _picker.getImage(source: ImageSource.gallery);
     _image = image;
-    //extra lines to get resized and normalized image
-    var img2 = img.decodeImage(File(image.path).readAsBytesSync());
-    img2?.setPixel(180, 180, 3);
-    img3 = img.normalize(img2!, 0, 1);
-    path_img = await save_img(img3);
   }
 
   // ignore: non_constant_identifier_names
